@@ -42,14 +42,19 @@ class LoginFragment : Fragment() {
 
         btn.setOnClickListener {
             val nameTxt = inputName.getText().toString()
+            var i : Int = 0
+            var mismo : Boolean = false
 
             if (nameTxt.isNotEmpty()) {
-                users.forEach {
-                    if (it.name.equals(nameTxt)) {
+
+                while(i < users.size && !mismo){
+                    if (users[i].name.equals(nameTxt)) {
+                        mismo = true
                         val action = LoginFragmentDirections.actionLoginFragmentToGameFragment()
                         v.findNavController().navigate(action)
                     } else {
                         Snackbar.make(v, "Nombre incorrecto", Snackbar.LENGTH_SHORT).show()
+                        i += 1
                     }
                 }
             } else {
